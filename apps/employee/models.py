@@ -4,6 +4,16 @@ from apps.company.models import JobModel
 
 # Create your models here.
 
+class EmployeeDetails(models.Model):
+    name = models.OneToOneField(User,on_delete=models.CASCADE)
+    resume = models.FileField(upload_to='uploads/resume/',blank=True, null=True)
+    skill = models.TextField(blank=True, null=True)
+    education = models.CharField(max_length=225,blank=True, null=True)
+    experiance = models.CharField(max_length=50,blank=True, null=True)
+
+    def __str__(self):
+        return self.name.first_name
+
 class ApplyJob(models.Model):
     STATUS_CHOICES = (
         ('submitted', 'Submitted'),
@@ -20,4 +30,6 @@ class ApplyJob(models.Model):
 
     def __str__(self):
         return self.applicant.first_name
+    
+
 

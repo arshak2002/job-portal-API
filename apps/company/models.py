@@ -3,6 +3,15 @@ from apps.accounts.models import User
 
 # Create your models here.
 
+class CompanyDetails(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    company_description = models.TextField(blank=True, null=True)
+    company_website = models.CharField(max_length=225,blank=True, null=True)
+    logo = models.ImageField(upload_to='uploads/logo/',blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.user.first_name
+
 class JobModel(models.Model):
     category = models.CharField(max_length=50,null=True,blank=True)
     title = models.CharField(max_length=225)
